@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('instructor_attendance_records', function (Blueprint $table) {
             $table->id();
+            $table->date('date');
             $table->foreignId('schedule_id')->constrained()->onDelete('cascade');
-            $table->date('date')->nullable();
             $table->time('time_in')->nullable();
             $table->time('time_out')->nullable();
             $table->timestamps();
+            $table->unique(['schedule_id', 'date']);
         });
     }
 

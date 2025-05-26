@@ -14,7 +14,7 @@ class StudentSeeder extends Seeder
     public function run(): void
     {
         DB::table('students')->insert([
-            // ["id" => 1, "user_id" => , "year_level_id" => , "program_id" => , "irregular" => ],
+            ["id" => 1, "user_id" => 15, "year_level_id" => 2, "program_id" => 1, "irregular" => false],
         ]);
     }
 }

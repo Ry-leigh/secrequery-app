@@ -11,6 +11,13 @@ class InstructorAttendance extends Model
 
     protected $table = 'instructor_attendance_records';
 
+    protected $fillable = [
+        'schedule_id',
+        'date',
+        'time_in',
+        'time_out',
+    ];
+
     public function schedule() {
         return $this->belongsTo(Schedule::class);
     }
