@@ -32,7 +32,7 @@ class UserSeeder extends Seeder
                 "middle_name" => null,
                 "last_name" => "DC",
                 "suffix" => null,
-                "email" => "mythrynne@gmail.com",
+                "email" => "ryanaarondc@gmail.com",
                 "password" => Hash::make('admin123')
             ],
             [
@@ -214,7 +214,7 @@ class UserSeeder extends Seeder
                 "middle_name" => "Raguine",
                 "last_name" => "Dela Cruz",
                 "suffix" => null,
-                "email" => "ryanaarondc@gmail.com",
+                "email" => "ryanaarondelacruz@student.laverdad.edu.ph",
                 "password" => Hash::make('123123123')
             ],
             [
@@ -387,6 +387,16 @@ class UserSeeder extends Seeder
                 "email" => "christiansamson@gmail.com",
                 "password" => Hash::make('123123123')
             ],
+            [
+                'id' => 38,
+                'role_id' => 5,
+                "first_name" => "Juliana Leigh",
+                "middle_name" => "",
+                "last_name" => "Cerillo",
+                "suffix" => null,
+                "email" => "mythrynne@gmail.com",
+                "password" => Hash::make('123123123')
+            ]
         ]);
     }
 }

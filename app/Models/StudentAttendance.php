@@ -26,7 +26,7 @@ class StudentAttendance extends Model
         return $this->belongsTo(Schedule::class);
     }
 
-    public function attendanceStatus() {
+    public function attendance_status() {
         return $this->belongsTo(AttendanceStatus::class);
     }
 }

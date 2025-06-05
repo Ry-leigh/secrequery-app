@@ -12,11 +12,11 @@
         @if (auth()->user()->role_id == 4)
             <a href="{{ route('secretary.instructor.index', ['date' => now()->toDateString(), 'user' => auth()->user()->id]) }}">Attendance</a>
         @elseif (auth()->user()->role_id == 5)
-            <a href="{{ route('attendance') }}">Attendance</a>
+            <a href="{{ route('attendance', ['date' => now()->toDateString()]) }}">Attendance</a>
         @endif
         <a href="{{ ('notes') }}">Notes</a>
         <a href="{{ ('tasks') }}">Tasks</a>
-        <a href="{{ ('events') }}">Events</a>
+        <a href="{{ route('events') }}">Events</a>
         <a href="{{ ('calendar') }}">Calendar</a>
     </nav>
 

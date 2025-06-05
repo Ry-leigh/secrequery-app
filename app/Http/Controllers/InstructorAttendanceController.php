@@ -7,15 +7,17 @@ use App\Models\InstructorAttendance;
 use App\Models\Schedule;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class InstructorAttendanceController extends Controller
 {
-    public function index($date, $user)
+    public function index($date)
     {
+        $secretary = Student::where('user_id', Auth::id())->first();
         $dayId = Day::where('day', \Carbon\Carbon::parse($date)->format('l'))->value('id') - 1;
-        $studentId = Student::where('user_id', $user)->first();
-        $schedules = Schedule::where('program_id', $studentId->program_id)
-                             ->where('year_level_id', $studentId->year_level_id)
+        $student = Student::where('user_id', $secretary->user_id)->first();
+        $schedules = Schedule::where('program_id', $student->program_id)
+                             ->where('year_level_id', $student->year_level_id)
                              ->where('day_id', $dayId)
                              ->get();
         

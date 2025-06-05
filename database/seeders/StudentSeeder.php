@@ -37,7 +37,7 @@ class StudentSeeder extends Seeder
             ["id" => 21, "user_id" => 35, "year_level_id" => 2, "program_id" => 1, "irregular" => false],
             ["id" => 22, "user_id" => 36, "year_level_id" => 2, "program_id" => 1, "irregular" => false],
             ["id" => 23, "user_id" => 37, "year_level_id" => 2, "program_id" => 2, "irregular" => false],
-            
+            ["id" => 24, "user_id" => 38, "year_level_id" => 1, "program_id" => 6, "irregular" => false],
         ]);
     }
 }
