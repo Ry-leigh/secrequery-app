@@ -6,6 +6,7 @@ use App\Http\Controllers\NoteController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudentAttendance;
 use App\Http\Controllers\StudentAttendanceController;
+use App\Http\Controllers\TaskController;
 use App\Models\InstructorAttendance;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +28,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('notes', NoteController::class);
+    Route::resource('notes', TaskController::class);
 
 });
 
@@ -45,4 +47,5 @@ require __DIR__.'/auth.php';
         2. Enable image or links in events for "more details"
         3. Add script to have the events scrolled on the current month
         4. Add POST, PUT, DELETR methods for admins and superadmins so events are not hardcoded
+        5. Notes and Tasks are resource which are simple CRUD, would be nice to make it complex in the background so it is more simple in the client-side
 */
