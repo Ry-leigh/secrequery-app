@@ -14,7 +14,7 @@
         @elseif (auth()->user()->role_id == 5)
             <a href="{{ route('attendance', ['date' => now()->toDateString()]) }}">Attendance</a>
         @endif
-        <a href="{{ ('notes') }}">Notes</a>
+        <a href="{{ route('notes.index') }}">Notes</a>
         <a href="{{ ('tasks') }}">Tasks</a>
         <a href="{{ route('events') }}">Events</a>
         <a href="{{ ('calendar') }}">Calendar</a>

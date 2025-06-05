@@ -23,7 +23,7 @@
             @elseif (auth()->user()->role_id == 5)
                 <li><a href="{{ route('attendance', ['date' => now()->toDateString()]) }}">Attendance</a></li>
             @endif
-            <li><a href="{{ ('notes') }}">Notes</a></li>
+            <a href="{{ route('notes.index') }}">Notes</a>
             <li><a href="{{ ('tasks') }}">Tasks</a></li>
             <li><a href="{{ route('events') }}">Events</a></li>
             <li><a href="{{ ('calendar') }}">Calendar</a></li>

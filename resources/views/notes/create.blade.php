@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Events</title>
+    <title>Create Note</title>
 </head>
 <body>
     <nav>
@@ -14,23 +14,27 @@
         @elseif (auth()->user()->role_id == 5)
             <a href="{{ route('attendance', ['date' => now()->toDateString()]) }}">Attendance</a>
         @endif
-        <a href="{{ ('notes') }}">Notes</a>
+        <a href="{{ route('notes.index') }}">Notes</a>
         <a href="{{ ('tasks') }}">Tasks</a>
         <a href="{{ route('events') }}">Events</a>
         <a href="{{ ('calendar') }}">Calendar</a>
     </nav>
-    <h1>Events</h1>
-    @foreach ($groupedEvents as $month => $events)
-        <h2 class="text-xl font-bold mt-6">{{ $month }}</h2>
+    <div class="container">
+        <h1>Add Note</h1>
 
-        @foreach ($events as $event)
-            <div class="ml-4 mb-2">
-                <strong>{{ \Carbon\Carbon::parse($event->date)->format('M d') }}: {{ $event->title }}</strong> 
-                
-                <br>
-                {{ $event->content }}
+        <form action="{{ route('notes.store') }}" method="POST">
+            @csrf
+            <div class="mb-3">
+                <label class="form-label">Title</label>
+                <input name="title" type="text" class="form-control" required value="{{ old('title') }}">
             </div>
-        @endforeach
-    @endforeach
+            <div class="mb-3">
+                <label class="form-label">Content</label>
+                <textarea name="content" class="form-control" rows="6">{{ old('content') }}</textarea>
+            </div>
+            <button class="btn btn-success">Save Note</button>
+            <a href="{{ route('notes.index') }}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
 </body>
 </html>
