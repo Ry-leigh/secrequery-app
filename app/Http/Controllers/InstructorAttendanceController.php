@@ -12,7 +12,7 @@ class InstructorAttendanceController extends Controller
 {
     public function index($date, $user)
     {
-        $dayId = Day::where('day', \Carbon\Carbon::parse($date)->format('l'))->value('id');
+        $dayId = Day::where('day', \Carbon\Carbon::parse($date)->format('l'))->value('id') - 1;
         $studentId = Student::where('user_id', $user)->first();
         $schedules = Schedule::where('program_id', $studentId->program_id)
                              ->where('year_level_id', $studentId->year_level_id)
@@ -25,7 +25,7 @@ class InstructorAttendanceController extends Controller
                                                     ->whereIn('schedule_id', $scheduleIds)
                                                     ->get();
         
-        return view('attendance', compact('schedules', 'instructorAttendance', 'date'));
+        return view('secretary.instructor-attendance', compact('schedules', 'instructorAttendance', 'date'));
     }
 
     public function timeIn(Request $request, $date, $schedule)
@@ -59,7 +59,7 @@ class InstructorAttendanceController extends Controller
             ]
         );
 
-        return redirect()->back()->with('success', 'Time-in recorded successfully');
+        return redirect()->back()->with('success', 'Time-out recorded successfully');
     }
 
     /**

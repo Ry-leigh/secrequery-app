@@ -19,7 +19,7 @@
         <ul>
             <li><a href="{{ url('/dashboard') }}">Dashboard</a></li>
             @if (auth()->user()->role_id == 4)
-                <li><a href="{{ route('secretary.attendance.index', ['date' => now()->toDateString(), 'user' => auth()->user()->id]) }}">Attendance</a></li>
+                <li><a href="{{ route('secretary.instructor.index', ['date' => now()->toDateString(), 'user' => auth()->user()->id]) }}">Attendance</a></li>
             @elseif (auth()->user()->role_id == 5)
                 <li><a href="{{ route('attendance') }}">Attendance</a></li>
             @endif

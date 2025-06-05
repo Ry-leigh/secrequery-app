@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\InstructorAttendanceController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StudentAttendance;
+use App\Http\Controllers\StudentAttendanceController;
 use App\Models\InstructorAttendance;
 use Illuminate\Support\Facades\Route;
 
@@ -19,8 +21,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/attendance/{date}/{user}', [InstructorAttendanceController::class, 'index'])->name('secretary.attendance.index');
-Route::post('/attendance/time-in/{date}/{schedule}', [InstructorAttendanceController::class, 'timeIn'])->name('attendance.timeIn');
-Route::post('/attendance/time-out/{date}/{schedule}', [InstructorAttendanceController::class, 'timeOut'])->name('attendance.timeOut');
+
+//middleware('secretary), prefix('secretary/instructor'), name('secretary)
+Route::get('/secretary/instructor/attendance/{date}/{user}', [InstructorAttendanceController::class, 'index'])->name('secretary.instructor.index');
+Route::post('/secretary/instructors/time-in/{date}/{schedule}', [InstructorAttendanceController::class, 'timeIn'])->name('secretary.instructor.timeIn');
+Route::post('/secretary/instructors/time-out/{date}/{schedule}', [InstructorAttendanceController::class, 'timeOut'])->name('secretary.instructor.timeOut');
+
+Route::get('/secretary/attenndance/{date}/{schedule}', [StudentAttendanceController::class, 'index'])->name('secretary.attendance.index');
+Route::post('/secretary/attenndance', [StudentAttendanceController::class, 'setStudentStatus'])->name('secretary.attendance.register');
 
 require __DIR__.'/auth.php';
