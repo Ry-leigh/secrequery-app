@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\StudentReachedAbsenceThreshold;
 use App\Models\Day;
 use App\Models\InstructorAttendance;
 use App\Models\IrregularStudentCourse;
@@ -82,6 +83,22 @@ class StudentAttendanceController extends Controller
                 'attendance_status_id' => $validated['attendance_status_id'],
             ]
         );
+
+        if ($validated['attendance_status_id'] >= 3) 
+        {
+            $absenceCount = StudentAttendance::where('student_id', $validated['student_id'])
+                                             ->where('schedule_id', $validated['schedule_id'])
+                                             ->where('attendance_status_id', 3)
+                                             ->count();
+
+            if ($absenceCount >= 2)
+            {
+                $student = Student::with('user')->findOrFail($validated['student_id']);
+                $schedule = Schedule::with('course')->findOrFail($validated['schedule_id']);
+
+                event(new StudentReachedAbsenceThreshold($student->user, $schedule->course, $absenceCount));
+            }
+        }
 
         return response()->json(['message' => 'Attendance updated']);
     }

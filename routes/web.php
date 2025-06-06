@@ -14,28 +14,36 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
 Route::middleware(['auth', 'verified'])->group(function () {
+
     Route::get('/dashboard', function() {return view('dashboard');})->name('dashboard');
     Route::get('/attendance/{date}', [StudentAttendanceController::class, 'index'])->name('attendance');
     Route::get('/events', [EventController::class, 'index'])->name('events');
 
+    Route::get('/notifications', function () {return view('notifications');})->name('notifications');
+
+});
+
+Route::middleware(['auth', 'verified'])->prefix('/secretary')->name('secretary.')->group(function () {
+
+    Route::prefix('/instructor')->name('instructor.')->group(function () {
+        Route::get('/attendance/{date}', [InstructorAttendanceController::class, 'index'])->name('index');
+        Route::post('/time-in/{date}/{schedule}', [InstructorAttendanceController::class, 'timeIn'])->name('timeIn');
+        Route::post('/time-out/{date}/{schedule}', [InstructorAttendanceController::class, 'timeOut'])->name('timeOut');
+    });
+
+    Route::get('/attendance/{date}/{schedule}', [StudentAttendanceController::class, 'secretaryIndex'])->name('attendance.index');
+    Route::post('/attendance/set-status', [StudentAttendanceController::class, 'setStudentStatus'])->name('attendance.register');
+
 });
 
 Route::middleware('auth')->group(function () {
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
 });
-
-//middleware('secretary), prefix('secretary/instructor'), name('secretary)
-Route::get('/secretary/instructor/attendance/{date}', [InstructorAttendanceController::class, 'index'])->name('secretary.instructor.index');
-Route::post('/secretary/instructors/time-in/{date}/{schedule}', [InstructorAttendanceController::class, 'timeIn'])->name('secretary.instructor.timeIn');
-Route::post('/secretary/instructors/time-out/{date}/{schedule}', [InstructorAttendanceController::class, 'timeOut'])->name('secretary.instructor.timeOut');
-
-Route::get('/secretary/attenndance/{date}/{schedule}', [StudentAttendanceController::class, 'secretaryIndex'])->name('secretary.attendance.index');
-Route::post('/secretary/attenndance/set-status', [StudentAttendanceController::class, 'setStudentStatus'])->name('secretary.attendance.register');
 
 require __DIR__.'/auth.php';
 /*
