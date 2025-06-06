@@ -18,8 +18,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/dashboard', function() {return view('dashboard');})->name('dashboard');
     Route::get('/attendance/{date}', [StudentAttendanceController::class, 'index'])->name('attendance');
+    Route::get('/notes', [NoteController::class, 'index'])->name('notes');
+    Route::get('/tasks', [TaskController::class, 'index'])->name('tasks');
     Route::get('/events', [EventController::class, 'index'])->name('events');
-
     Route::get('/notifications', function () {return view('notifications');})->name('notifications');
 
 });
