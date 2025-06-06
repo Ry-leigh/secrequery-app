@@ -1,6 +1,7 @@
 @extends('layouts.main')
 
 @section('title', 'Attendance')
+@include('partials.calendar')
 
 @section('content')
 <style>
